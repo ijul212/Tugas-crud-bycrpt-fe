@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 const AddUser = () => {
     const [name, setName] = useState('');
@@ -9,26 +9,26 @@ const AddUser = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const checkDuplicate = async () => {
-        const response = await axios.get('http://localhost:5000/users');
-        const users = response.data;
-        const nameExists = users.some(user => user.name === name);
-        const emailExists = users.some(user => user.email === email);
-        return { nameExists, emailExists };
-    };
+    // const checkDuplicate = async () => {
+    //     const response = await axios.get('http://localhost:5000/users');
+    //     const users = response.data;
+    //     const nameExists = users.some(user => user.name === name);
+    //     const emailExists = users.some(user => user.email === email);
+    //     return { nameExists, emailExists };
+    // };
 
     const saveUser = async (e) => {
         e.preventDefault();
 
-        const { nameExists, emailExists } = await checkDuplicate();
-        if (nameExists) {
-            toast.error("Nama sudah ada, gunakan nama yang lain.");
-            return;
-        }
-        if (emailExists) {
-            toast.error("Email sudah ada, gunakan email yang lain.");
-            return;
-        }
+        // const { nameExists, emailExists } = await checkDuplicate();
+        // if (nameExists) {
+        //     toast.error("Nama sudah ada, gunakan nama yang lain.");
+        //     return;
+        // }
+        // if (emailExists) {
+        //     toast.error("Email sudah ada, gunakan email yang lain.");
+        //     return;
+        // }
 
         try {
             await axios.post('http://localhost:5000/users', {
@@ -36,11 +36,11 @@ const AddUser = () => {
                 email,
                 password
             });
-            toast.success(`Berhasil Menambah Data ${name}`);
+            // toast.success(`Berhasil Menambah Data ${name}`);
             navigate('/');
         } catch (error) {
             console.log(error);
-            toast.error("Gagal Menambahkan Data");
+            // toast.error("Gagal Menambahkan Data");
         }
     };
 
